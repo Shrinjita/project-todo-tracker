@@ -9,16 +9,13 @@
 <body>
     <div class="sidebar">
         <h2>Project Tracker</h2>
-        <input type="text" id="docLink" placeholder="Project Doc URL">
-        <input type="text" id="tasksLink" placeholder="Tasks URL">
-        <input type="text" id="notesLink" placeholder="Notes URL">
-        <button onclick="updateLinks()">Update Links</button>
-    
         <ul>
-            <li><a id="docButton" href="#" target="_blank">📄 Project Doc</a></li>
-            <li><a id="tasksButton" href="#" target="_blank">📝 Tasks</a></li>
-            <li><a id="notesButton" href="#" target="_blank">📌 Notes</a></li>
+            <li><a id="docButton" href="#" target="_blank">📄 Project Doc</a><input type="text" id="docLink" placeholder="Project Doc URL"></li>
+            <li><a id="tasksButton" href="#" target="_blank">📝 Tasks</a><input type="text" id="tasksLink" placeholder="Tasks URL"></li>
+            <li><a id="notesButton" href="#" target="_blank">📌 Notes</a><input type="text" id="notesLink" placeholder="Notes URL"></li>
+
         </ul>
+        <button onclick="updateLinks()">Update Links</button>
     </div>    
 
     <div class="container">
