@@ -93,3 +93,13 @@ window.onload = function () {
     loadTasks();
     loadLinks();
 };
+
+function updateLinks() {
+    let docURL = document.getElementById("docLink").value.trim();
+    let tasksURL = document.getElementById("tasksLink").value.trim();
+    let notesURL = document.getElementById("notesLink").value.trim();
+
+    if (docURL) document.getElementById("docButton").href = docURL;
+    if (tasksURL) document.getElementById("tasksButton").href = tasksURL;
+    if (notesURL) document.getElementById("notesButton").href = notesURL;
+}
