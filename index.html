@@ -29,9 +29,10 @@
                 <option value="Completed">Completed</option>
             </select>
             <input type="date" id="deadlineInput">
+            <input type="text" id="doubtInput" placeholder="Doubt (Max 20 words)">
             <button onclick="addTask()">Add</button>
         </div>
-
+    
         <table>
             <thead>
                 <tr>
@@ -39,13 +40,13 @@
                     <th>Person</th>
                     <th>Status</th>
                     <th>Deadline</th>
+                    <th>Doubts</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody id="taskList"></tbody>
         </table>
     </div>
-
-    <script src="script.js"></script>
+     <script src="script.js"></script>
 </body>
 </html>

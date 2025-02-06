@@ -5,9 +5,15 @@ function addTask() {
     let personText = document.getElementById("personInput").value.trim();
     let statusText = document.getElementById("statusInput").value;
     let deadlineText = document.getElementById("deadlineInput").value;
+    let doubtText = document.getElementById("doubtInput").value.trim();
+
+    if (doubtText.split(/\s+/).length > 20) {
+        alert("Doubt must be 20 words or fewer.");
+        return;
+    }
 
     if (taskText !== "") {
-        tasks.push({ task: taskText, person: personText, status: statusText, deadline: deadlineText });
+        tasks.push({ task: taskText, person: personText, status: statusText, deadline: deadlineText, doubt: doubtText });
         updateTaskList();
         saveTasks();
         clearInputs();
@@ -31,6 +37,7 @@ function updateTaskList() {
                 </select>
             </td>
             <td contenteditable="true">${task.deadline}</td>
+            <td contenteditable="true">${task.doubt}</td>
             <td><button onclick="removeTask(${index})">❌</button></td>
         `;
         taskList.appendChild(row);
