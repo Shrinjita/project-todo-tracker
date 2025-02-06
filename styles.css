@@ -14,6 +14,24 @@ body {
     color: white;
 }
 
+.sidebar input {
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+    border: 2px solid #ff66b2;
+    border-radius: 5px;
+}
+
+.sidebar button {
+    width: 100%;
+    padding: 8px;
+    background: #ff66b2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
 .sidebar ul {
     list-style-type: none;
     padding: 0;

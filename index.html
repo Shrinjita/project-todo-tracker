@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project To-Do List</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="sidebar">
         <h2>Project Tracker</h2>
-        <ul>
-            <li><a href="https://docs.google.com/document/d/12zhvapCRJLwhFUIBBbFoM48YXWTv1UKBidA9qwUW2Uw/edit?usp=sharing">📄 Project Doc</a></li>
-            <li><a href="#">📝 Tasks</a></li>
-            <li><a href="#">📌 Notes</a></li>
-        </ul>
+        <input type="text" id="docLink" placeholder="Project Doc URL">
+        <input type="text" id="tasksLink" placeholder="Tasks URL">
+        <input type="text" id="notesLink" placeholder="Notes URL">
+        <button onclick="updateLinks()">Update Links</button>
     </div>
 
     <div class="container">

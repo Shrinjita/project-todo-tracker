@@ -6,7 +6,7 @@ function addTask() {
     let statusText = document.getElementById("statusInput").value;
     let deadlineText = document.getElementById("deadlineInput").value;
 
-    if (taskText !== "" && personText !== "" && deadlineText !== "") {
+    if (taskText !== "") {
         tasks.push({ task: taskText, person: personText, status: statusText, deadline: deadlineText });
         updateTaskList();
         saveTasks();
@@ -21,8 +21,8 @@ function updateTaskList() {
     tasks.forEach((task, index) => {
         let row = document.createElement("tr");
         row.innerHTML = `
-            <td>${task.task}</td>
-            <td>${task.person}</td>
+            <td contenteditable="true">${task.task}</td>
+            <td contenteditable="true">${task.person}</td>
             <td>
                 <select onchange="updateStatus(${index}, this.value)">
                     <option value="Pending" ${task.status === "Pending" ? "selected" : ""}>Pending</option>
@@ -30,7 +30,7 @@ function updateTaskList() {
                     <option value="Completed" ${task.status === "Completed" ? "selected" : ""}>Completed</option>
                 </select>
             </td>
-            <td>${task.deadline}</td>
+            <td contenteditable="true">${task.deadline}</td>
             <td><button onclick="removeTask(${index})">❌</button></td>
         `;
         taskList.appendChild(row);
@@ -67,4 +67,29 @@ function clearInputs() {
     document.getElementById("deadlineInput").value = "";
 }
 
-window.onload = loadTasks;
+function updateLinks() {
+    let docLink = document.getElementById("docLink").value.trim();
+    let tasksLink = document.getElementById("tasksLink").value.trim();
+    let notesLink = document.getElementById("notesLink").value.trim();
+
+    if (docLink) localStorage.setItem("projectDoc", docLink);
+    if (tasksLink) localStorage.setItem("tasks", tasksLink);
+    if (notesLink) localStorage.setItem("notes", notesLink);
+
+    loadLinks();
+}
+
+function loadLinks() {
+    let projectDoc = localStorage.getItem("projectDoc") || "#";
+    let tasks = localStorage.getItem("tasks") || "#";
+    let notes = localStorage.getItem("notes") || "#";
+
+    document.getElementById("projectDoc").href = projectDoc;
+    document.getElementById("tasks").href = tasks;
+    document.getElementById("notes").href = notes;
+}
+
+window.onload = function () {
+    loadTasks();
+    loadLinks();
+};
