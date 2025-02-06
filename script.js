@@ -1,3 +1,38 @@
+function saveLink(key) {
+    let linkValue = document.getElementById(key).value.trim();
+    if (linkValue !== "" && isValidURL(linkValue)) {
+        localStorage.setItem(key, linkValue);
+        alert("Link saved successfully!");
+    } else {
+        alert("Please enter a valid URL.");
+    }
+}
+
+function openLink(key) {
+    let savedLink = localStorage.getItem(key);
+    if (savedLink) {
+        window.open(savedLink, "_blank");
+    } else {
+        alert("No link saved. Please enter and save a link first.");
+    }
+}
+
+function loadSavedLinks() {
+    document.getElementById("docLink").value = localStorage.getItem("docLink") || "";
+    document.getElementById("tasksLink").value = localStorage.getItem("tasksLink") || "";
+    document.getElementById("notesLink").value = localStorage.getItem("notesLink") || "";
+}
+
+function isValidURL(url) {
+    let pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+        '((([a-zA-Z\\d]([a-zA-Z\\d-]*[a-zA-Z\\d])*)\\.)+[a-zA-Z]{2,}|' + // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-zA-Z\\d%@_.~+&:]*)*' + // port and path
+        '(\\?[;&a-zA-Z\\d%@_.,~+&:=-]*)?' + // query string
+        '(\\#[-a-zA-Z\\d_]*)?$','i'); // fragment locator
+    return !!pattern.test(url);
+}
+
 let tasks = [];
 
 function addTask() {
@@ -56,11 +91,11 @@ function updateStatus(index, newStatus) {
 }
 
 function saveTasks() {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem("tasksList", JSON.stringify(tasks)); // Prevent overwriting "tasks" URL
 }
 
 function loadTasks() {
-    let storedTasks = localStorage.getItem("tasks");
+    let storedTasks = localStorage.getItem("tasksList");
     if (storedTasks) {
         tasks = JSON.parse(storedTasks);
         updateTaskList();
@@ -72,41 +107,40 @@ function clearInputs() {
     document.getElementById("personInput").value = "";
     document.getElementById("statusInput").value = "Pending";
     document.getElementById("deadlineInput").value = "";
+    document.getElementById("doubtInput").value = ""; // Fixed: Clears "Doubt" input
 }
-
-function updateLinks() {
-    let docLink = document.getElementById("docLink").value.trim();
-    let tasksLink = document.getElementById("tasksLink").value.trim();
-    let notesLink = document.getElementById("notesLink").value.trim();
-
-    if (docLink) localStorage.setItem("projectDoc", docLink);
-    if (tasksLink) localStorage.setItem("tasks", tasksLink);
-    if (notesLink) localStorage.setItem("notes", notesLink);
-
-    loadLinks();
-}
-
-function loadLinks() {
-    let projectDoc = localStorage.getItem("projectDoc") || "#";
-    let tasks = localStorage.getItem("tasks") || "#";
-    let notes = localStorage.getItem("notes") || "#";
-
-    document.getElementById("projectDoc").href = projectDoc;
-    document.getElementById("tasks").href = tasks;
-    document.getElementById("notes").href = notes;
-}
-
-window.onload = function () {
-    loadTasks();
-    loadLinks();
-};
 
 function updateLinks() {
     let docURL = document.getElementById("docLink").value.trim();
     let tasksURL = document.getElementById("tasksLink").value.trim();
     let notesURL = document.getElementById("notesLink").value.trim();
 
-    if (docURL) document.getElementById("docButton").href = docURL;
-    if (tasksURL) document.getElementById("tasksButton").href = tasksURL;
-    if (notesURL) document.getElementById("notesButton").href = notesURL;
+    if (docURL) {
+        localStorage.setItem("projectDoc", docURL);
+        document.getElementById("docButton").href = docURL;
+    }
+    if (tasksURL) {
+        localStorage.setItem("tasksURL", tasksURL);
+        document.getElementById("tasksButton").href = tasksURL;
+    }
+    if (notesURL) {
+        localStorage.setItem("notesURL", notesURL);
+        document.getElementById("notesButton").href = notesURL;
+    }
 }
+
+function loadLinks() {
+    let projectDoc = localStorage.getItem("projectDoc") || "#";
+    let tasksURL = localStorage.getItem("tasksURL") || "#";
+    let notesURL = localStorage.getItem("notesURL") || "#";
+
+    document.getElementById("docButton").href = projectDoc;
+    document.getElementById("tasksButton").href = tasksURL;
+    document.getElementById("notesButton").href = notesURL;
+}
+
+window.onload = function () {
+    loadTasks();
+    loadLinks();
+    loadSavedLinks();
+};
