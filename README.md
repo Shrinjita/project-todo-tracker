@@ -1,9 +1,8 @@
-# 🌸 Pink To-Do Tracker  
+# 🌸 Project To-Do Tracker  
 
-A **girly-themed To-Do List** for project management with **task assignments, status tracking, and deadlines.** Designed for **collaborative** and **individual** work.  
+A **To-Do List** for project management with **task assignments, status tracking, and deadlines.** Designed for **collaborative** and **individual** work.  
 
 ## ✨ Features  
-- 🎀 **Pink UI** with a sidebar for project links  
 - 📝 **Task assignments** (Task, Person, Status, Deadline)  
 - 📌 **Status tracking** (Pending, In Progress, Completed)  
 - ⏳ **Deadline management** with a date picker  
